@@ -112,6 +112,7 @@
             display: flex;
             transition: transform 0.5s ease-in-out;
         }
+        /* Added cursor pointer to images */
         .carousel-slide img {
             width: 100%;
             flex-shrink: 0; /* Prevents images from shrinking */
@@ -178,20 +179,10 @@
             </div>
         </section>
 
-        <!-- FIRST AUDIO MESSAGE -->
         <section class="mb-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-pink-500 mb-6">A Voice Message</h2>
             <audio controls class="w-full md:w-3/4 lg:w-2/3 mx-auto bg-gray-100 p-4 rounded-xl shadow-md">
-                <source src="f11voice.ogg" type="audio/ogg">
-                Your browser does not support the audio element.
-            </audio>
-        </section>
-        
-        <!-- SECOND AUDIO MESSAGE -->
-        <section class="mb-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-pink-500 mb-6">Another Voice Message</h2>
-            <audio controls class="w-full md:w-3/4 lg:w-2/3 mx-auto bg-gray-100 p-4 rounded-xl shadow-md">
-                <source src="f12voice.ogg" type="audio/ogg">
+                <source src="happyBD fevu.ogg" type="audio/ogg">
                 Your browser does not support the audio element.
             </audio>
         </section>
@@ -205,6 +196,7 @@
                 </video>
             </div>
             <div class="text-center mt-4">
+                <!-- FIX: Corrected filename to match the video tag source -->
                 <button onclick="openVideoFullscreen('Fevu V1.mp4')" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors">
                     View Fullscreen
                 </button>
@@ -220,6 +212,7 @@
                 </video>
             </div>
             <div class="text-center mt-4">
+                <!-- FIX: Corrected filename to match the video tag source -->
                 <button onclick="openVideoFullscreen('fevu V2.mp4')" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors">
                     View Fullscreen
                 </button>
@@ -238,17 +231,15 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center text-pink-500 mb-6">preety Album🧚‍♀️🧚‍♀️🧚‍♀️</h2>
             <div class="carousel-container">
                 <div class="carousel-slide" id="carouselSlide">
-                    <img src="image1.jpg" alt="Memory 1" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image2.jpg" alt="Memory 2" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image3.jpg" alt="Memory 3" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image4.jpg" alt="Memory 4" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image5.jpg" alt="Memory 5" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image6.jpg" alt="Memory 6" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image7.jpg" alt="Memory 7" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image8.jpg" alt="Memory 8" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image9.jpg" alt="Memory 9" onclick="openFullscreen(this)" class="cursor-pointer">
-                    <img src="image10.jpg" alt="Memory 10" onclick="openFullscreen(this)" class="cursor-pointer">
-                </div>
+                    <!-- ADDED: onclick and cursor-pointer class to enable fullscreen image viewing -->
+                    <img src="Fpic1.jpg" alt="Memory 1" onclick="openFullscreen(this)" class="cursor-pointer">
+                    <img src="Fpic2.jpg" alt="Memory 2" onclick="openFullscreen(this)" class="cursor-pointer">
+                    <img src="Fpic 3.jpg" alt="Memory 3" onclick="openFullscreen(this)" class="cursor-pointer">
+                    <img src="Fpic 4.jpg" alt="Memory 4" onclick="openFullscreen(this)" class="cursor-pointer">
+                    <img src="Fpic 5.jpg" alt="Memory 5" onclick="openFullscreen(this)" class="cursor-pointer">
+                    <img src="Fpic 6.jpg" alt="Memory 6" onclick="openFullscreen(this)" class="cursor-pointer">
+                    <img src="Fpic7.jpg" alt="Memory 7" onclick="openFullscreen(this)" class="cursor-pointer">
+                    </div>
                 <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
                 <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
             </div>
@@ -258,7 +249,7 @@
         <section class="mb-10 text-center">
             <div class="bg-pink-50 rounded-xl p-6 hover-lift">
                 <p class="text-gray-800 leading-relaxed text-base md:text-lg">
-                    Wishing her a happiest birthday!
+                    While wishing you happiest birthday, 1 ametesh new 2 ametesh new ...😂😂 edmew yekoyen ena enkuan lezi ken abekash rejm edme kedesta gar yanuresh yene kechacha demo atweferim ende beyi kemilush toxic sewoch raqi 😁😁 enkuan norshelen Happy Birthday my dear.
                 </p>
             </div>
         </section>
@@ -288,10 +279,12 @@
 
     <div id="videoOverlay">
         <span id="closeVideoBtn" onclick="closeVideoFullscreen()">&times;</span>
+        <!-- Added 'muted' here to satisfy some browser autoplay policies, though we explicitly unmute in JS -->
         <video id="fullscreenVideo" controls loop playsinline muted class="rounded-xl"></video>
     </div>
 
     <script>
+        // Fullscreen Image Functions (Existing)
         function openFullscreen(imageElement) {
             const overlay = document.getElementById('imageOverlay');
             const fullscreenImage = document.getElementById('fullscreenImage');
@@ -304,15 +297,24 @@
             overlay.classList.remove('active');
         }
 
+        // Fullscreen Video Functions (FIXED LOGIC - Ensures the new video source is loaded)
         function openVideoFullscreen(videoSrc) {
             const overlay = document.getElementById('videoOverlay');
             const videoElement = document.getElementById('fullscreenVideo');
+            
+            // 1. Set the video source
             videoElement.src = videoSrc;
+            
+            // 2. Load the new source data (CRUCIAL FIX)
             videoElement.load();
+            
+            // 3. Show the overlay
             overlay.classList.add('active');
+            
+            // 4. Unmute it and attempt to play 
             videoElement.muted = false; 
             videoElement.play().catch(error => {
-                console.warn("Autoplay failed in fullscreen.", error);
+                console.warn("Autoplay failed in fullscreen. User must click play button.", error);
             });
         }
 
@@ -320,13 +322,15 @@
             const overlay = document.getElementById('videoOverlay');
             const videoElement = document.getElementById('fullscreenVideo');
             videoElement.pause();
-            videoElement.currentTime = 0;
+            videoElement.currentTime = 0; // Reset video to start
             overlay.classList.remove('active');
-            videoElement.src = '';
-            videoElement.muted = true;
+            videoElement.src = ''; // Clear source to prevent ghost audio
+            videoElement.muted = true; // Mute on close
         }
 
+        // Image Carousel Logic (Existing)
         const carouselSlide = document.getElementById('carouselSlide');
+        // Added a check here to ensure carouselSlide exists before querying images
         const images = carouselSlide ? carouselSlide.querySelectorAll('img') : [];
         const totalImages = images.length;
         let currentIndex = 0;
@@ -335,7 +339,7 @@
         const createDots = () => {
             const dotsContainer = document.getElementById('carouselDots');
             if (!dotsContainer) return;
-            dotsContainer.innerHTML = '';
+            dotsContainer.innerHTML = ''; // Clear existing dots
             for (let i = 0; i < totalImages; i++) {
                 const dot = document.createElement('span');
                 dot.classList.add('dot');
@@ -359,25 +363,25 @@
 
         const showSlide = (index) => {
             if (!carouselSlide) return;
-            currentIndex = (index + totalImages) % totalImages;
+            currentIndex = (index + totalImages) % totalImages; // Loop around
             carouselSlide.style.transform = `translateX(-${currentIndex * 100}%)`;
             updateDots();
         };
 
         const moveSlide = (step) => {
             showSlide(currentIndex + step);
-            resetAutoSlide();
+            resetAutoSlide(); // Reset timer on manual navigation
         };
 
         const goToSlide = (index) => {
             showSlide(index);
-            resetAutoSlide();
+            resetAutoSlide(); // Reset timer on manual navigation
         };
 
         const startAutoSlide = () => {
             autoSlideInterval = setInterval(() => {
                 moveSlide(1);
-            }, 5000);
+            }, 5000); // Change image every 5 seconds
         };
 
         const resetAutoSlide = () => {
@@ -385,11 +389,12 @@
             startAutoSlide();
         };
 
+        // Initialize carousel on page load
         document.addEventListener('DOMContentLoaded', () => {
              if (totalImages > 0) {
                 createDots();
-                showSlide(0);
-                startAutoSlide();
+                showSlide(0); // Show the first slide
+                startAutoSlide(); // Start auto-sliding
             }
         });
     </script>
